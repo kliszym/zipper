@@ -21,9 +21,15 @@
     <ClCompile Include="FileHeaderTools.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="OpenFileTools.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileHeaderDescriptors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenFileTools.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

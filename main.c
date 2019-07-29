@@ -1,18 +1,22 @@
 #include "FileHeaderDescriptors.h"
-
+#include "OpenFileTools.h"
 
 int main()
 {
+	FILE* f;
 	FileHeaderInfo info;
-	ReadFileInfo(&info);
-	if (info.fh.signature[0] == 0x4b50
-		&& info.fh.signature[1] == 0x0403)
-	{
-		printf("%s", "signature correct\n");
-	}
-	printf("\n");
-	printf("%s%s", info.fhd.fileName, "\n");
-	FileHeaderDeinitialize(info);
 
+	f = OpenFile();
+
+	while (1)
+	{
+		ReadFileInfo(f, &info);
+		printf("%s%s", info.fhd.fileName, "\n");
+
+		FileHeaderDeinitialize(&info);
+		GoNextHeader(f, &info);
+	}
+	
+	CloseFile(f);
 	return 0;
 }

@@ -44,5 +44,14 @@ typedef struct DataDescriptor
 }
 DataDescriptor;
 
+void FileHeaderInitialize(FileHeaderInfo *info);
+void FileHeaderDeinitialize(FileHeaderInfo *info);
+void Read(FILE *f, void *info, int size);
+void SetEndName(FileHeaderInfo *info);
+char CheckSignature(FileHeaderInfo *info);
+void ReadFileInfo(FILE *f, FileHeaderInfo *info);
+
+char CheckEncription(FileHeaderInfo *info);
+void GoNextHeader(FILE* f, FileHeaderInfo *info);
 
 #endif

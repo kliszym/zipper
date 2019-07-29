@@ -119,9 +119,11 @@
     <ClCompile Include="main.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsC</CompileAs>
     </ClCompile>
+    <ClCompile Include="OpenFileTools.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileHeaderDescriptors.h" />
+    <ClInclude Include="OpenFileTools.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

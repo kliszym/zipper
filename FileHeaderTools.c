@@ -2,7 +2,7 @@
 
 void FileHeaderInitialize(FileHeaderInfo *info)
 {
-	info->fhd.fileName = (byte*)malloc((uint32_t)(info->fh.fileName_len) * sizeof(byte));
+	info->fhd.fileName = (byte*)malloc((uint32_t)(info->fh.fileName_len + 1) * sizeof(byte));
 	info->fhd.extras = (byte*)malloc((uint32_t)info->fh.extras_len * sizeof(byte));
 }
 
@@ -17,22 +17,39 @@ void Read(FILE *f, void *info, int size)
 	fread(info, size, 1, f);
 }
 
-void ReadFileInfo(FileHeaderInfo *info)
+void SetEndName(FileHeaderInfo *info)
 {
-	FILE *f;
-	f = fopen("test.docx", "rb");
-	if (f == NULL)
-	{
-		perror("Error while opening the file.\n");
-		exit(EXIT_FAILURE);
-	}
+	info->fhd.fileName[info->fh.fileName_len] = '\0';
+}
 
+char CheckSignature(FileHeaderInfo *info)
+{
+	return info->fh.signature[0] == 0x4b50
+		&& info->fh.signature[1] == 0x0403;
+}
+
+void ReadFileInfo(FILE *f, FileHeaderInfo *info)
+{
 	Read(f, &info->fh, sizeof(FileHeader));
 	FileHeaderInitialize(info);
 
-	Read(f, info->fhd.fileName, info->fh.fileName_len);
-	Read(f, info->fhd.extras, info->fh.extras_len);
-	//do sth
+	if (!CheckSignature(info))
+	{
+		perror("Wrong file format.\n");
+		exit(EXIT_FAILURE);
+	}
 
-	fclose(f);
+	Read(f, info->fhd.fileName, info->fh.fileName_len);
+	SetEndName(info);
+	Read(f, info->fhd.extras, info->fh.extras_len);
+}
+
+char CheckEncription(FileHeaderInfo *info)
+{
+	return (info->fh.flags & 0x4) == 0x4;
+}
+
+void GoNextHeader(FILE* f, FileHeaderInfo *info)
+{
+	fseek(f, info->fh.comp_size[1] * 0x10000 + info->fh.comp_size[0], SEEK_CUR);
 }
