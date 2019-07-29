@@ -122,6 +122,9 @@
     <ClCompile Include="OpenFileTools.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Defines.h" />
+    <ClInclude Include="DigitalSignature.h" />
+    <ClInclude Include="CentralDirectoryDescriptors.h" />
     <ClInclude Include="FileHeaderDescriptors.h" />
     <ClInclude Include="OpenFileTools.h" />
   </ItemGroup>

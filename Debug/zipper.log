@@ -1,3 +1,5 @@
 ﻿  main.c
+  FileHeaderTools.c
+  Generating Code...
   zipper.vcxproj -> C:\Users\klisz\Documents\Visual Studio 2015\Projects\zipper\Debug\zipper.exe
   zipper.vcxproj -> C:\Users\klisz\Documents\Visual Studio 2015\Projects\zipper\Debug\zipper.pdb (Partial PDB)

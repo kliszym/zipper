@@ -3,8 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-
-typedef unsigned char byte;
+#include "Defines.h"
 
 typedef struct FileHeader
 {

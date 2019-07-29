@@ -24,8 +24,7 @@ void SetEndName(FileHeaderInfo *info)
 
 char CheckSignature(FileHeaderInfo *info)
 {
-	return info->fh.signature[0] == 0x4b50
-		&& info->fh.signature[1] == 0x0403;
+	return info->fh.signature[1] * 0x10000 + info->fh.signature[0] == local_file_header_signature;
 }
 
 void ReadFileInfo(FILE *f, FileHeaderInfo *info)
