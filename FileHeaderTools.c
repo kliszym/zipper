@@ -24,7 +24,7 @@ void SetEndName(FileHeaderInfo *info)
 
 char CheckSignature(FileHeaderInfo *info)
 {
-	return info->fh.signature[1] * 0x10000 + info->fh.signature[0] == local_file_header_signature;
+	return info->fh.signature[1] * 0x10000 + info->fh.signature[0] == signature_file_header;
 }
 
 void ReadFileInfo(FILE *f, FileHeaderInfo *info)
@@ -43,9 +43,49 @@ void ReadFileInfo(FILE *f, FileHeaderInfo *info)
 	Read(f, info->fhd.extras, info->fh.extras_len);
 }
 
-char CheckEncription(FileHeaderInfo *info)
+char CheckBit1(FileHeaderInfo *info)
+{
+	return (info->fh.flags & 0x2) == 0x2;
+}
+
+char CheckBit2(FileHeaderInfo *info)
 {
 	return (info->fh.flags & 0x4) == 0x4;
+}
+
+char CheckEncryption(FileHeaderInfo *info)
+{
+	return (info->fh.flags & 0x1) == 0x1;
+}
+
+char CheckCompresion(FileHeaderInfo *info)
+{
+	return (info->fh.flags & 0x8) == 0x8;
+}
+
+char CheckDeflation(FileHeaderInfo *info)
+{
+	return (info->fh.flags & 0x10) == 0x10;
+}
+
+char CheckPatch(FileHeaderInfo *info)
+{
+	return (info->fh.flags & 0x20) == 0x20;
+}
+
+char CheckStrongEncryption(FileHeaderInfo *info)
+{
+	return (info->fh.flags & 0x40) == 0x40;
+}
+
+char CheckEFS(FileHeaderInfo *info)
+{
+	return (info->fh.flags & 0x800) == 0x800;
+}
+
+char CheckCentralDirEncryption(FileHeaderInfo *info)
+{
+	return (info->fh.flags & 0x2000) == 0x2000;
 }
 
 void GoNextHeader(FILE* f, FileHeaderInfo *info)

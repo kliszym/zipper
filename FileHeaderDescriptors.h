@@ -50,7 +50,17 @@ void SetEndName(FileHeaderInfo *info);
 char CheckSignature(FileHeaderInfo *info);
 void ReadFileInfo(FILE *f, FileHeaderInfo *info);
 
-char CheckEncription(FileHeaderInfo *info);
+char CheckBit1(FileHeaderInfo *info);
+char CheckBit2(FileHeaderInfo *info);
+char CheckEncryption(FileHeaderInfo *info);
+char CheckCompresion(FileHeaderInfo *info);
+char CheckDeflation(FileHeaderInfo *info);
+char CheckPatch(FileHeaderInfo *info);
+char CheckStrongEncryption(FileHeaderInfo *info);
+//przy ustawianiu strong encryption, równie¿ ustawiæ bit 0 na 1
+char CheckEFS(FileHeaderInfo *info);
+char CheckCentralDirEncryption(FileHeaderInfo *info);
+
 void GoNextHeader(FILE* f, FileHeaderInfo *info);
 
 #endif

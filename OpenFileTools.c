@@ -3,7 +3,7 @@
 FILE* OpenFile()
 {
 	FILE *f;
-	f = fopen("test.docx", "rb");
+	f = fopen("test.zip", "rb");
 	if (f == NULL)
 	{
 		perror("Error while opening the file.\n");
